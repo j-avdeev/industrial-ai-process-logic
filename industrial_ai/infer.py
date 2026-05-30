@@ -4,7 +4,8 @@ import argparse
 from pathlib import Path
 
 from .anomaly import validate_steps
-from .baseline import NGramRanker, PrefixIndex
+from .baseline import NGramRanker
+from .completion import CompletionEngine, default_checkpoint_path
 from .data import load_training_sequences, read_long_sequences, read_rows, split_steps, write_rows
 from .paths import DEFAULT_DATA_DIR, DEFAULT_SUBMISSIONS_DIR, PROJECT_ROOT
 
@@ -17,6 +18,28 @@ def _load_corpus(data_dir: Path, generated_dir: Path | None = None):
     return records
 
 
+def _has_generated_data(path: Path) -> bool:
+    return path.exists() and any(path.glob("*.csv"))
+
+
+def _resolve_completion_mode(mode: str, generated_dir: Path, checkpoint_path: Path) -> str:
+    if mode != "auto":
+        return mode
+    if _has_generated_data(generated_dir) or checkpoint_path.exists():
+        return "ensemble"
+    return "prefix"
+
+
+def _completion_fraction(row: dict[str, str]) -> float | None:
+    value = row.get("COMPLETION_FRACTION", "").strip()
+    if not value:
+        return None
+    try:
+        return float(value)
+    except ValueError:
+        return None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate Track 1 submission CSVs.")
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR)
@@ -25,11 +48,29 @@ def main() -> None:
     parser.add_argument("--anomaly-input", type=Path, default=PROJECT_ROOT / "data" / "dev" / "eval_input_anomaly.csv")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_SUBMISSIONS_DIR)
     parser.add_argument("--max-new-steps", type=int, default=180)
+    parser.add_argument(
+        "--completion-mode",
+        choices=["auto", "prefix", "retrieval", "beam", "ensemble"],
+        default="auto",
+        help="Completion strategy. auto uses ensemble when generated data/checkpoints exist, otherwise prefix baseline.",
+    )
+    parser.add_argument("--completion-top-records", type=int, default=96)
+    parser.add_argument("--completion-beam-width", type=int, default=10)
+    parser.add_argument("--checkpoint", type=Path, default=default_checkpoint_path())
+    parser.add_argument("--transformer-device", default="cpu")
     args = parser.parse_args()
 
     records = _load_corpus(args.data_dir, args.generated_dir)
     ranker = NGramRanker(max_order=8).fit(records)
-    prefix_index = PrefixIndex(records)
+    completion_mode = _resolve_completion_mode(args.completion_mode, args.generated_dir, args.checkpoint)
+    completion_engine = CompletionEngine(
+        records,
+        ranker,
+        data_dir=args.data_dir,
+        checkpoint_path=args.checkpoint if args.checkpoint.exists() else None,
+        transformer_device=args.transformer_device,
+    )
+    print(f"Completion mode: {completion_mode}")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -50,9 +91,15 @@ def main() -> None:
                 "RANK_4": ranks[3],
                 "RANK_5": ranks[4],
             })
-            suffix = prefix_index.best_completion(family, partial)
-            if suffix is None or not suffix:
-                suffix = ranker.complete_greedy(family, partial, max_new_steps=args.max_new_steps)
+            suffix = completion_engine.complete(
+                family,
+                partial,
+                completion_fraction=_completion_fraction(row),
+                mode=completion_mode,
+                max_new_steps=args.max_new_steps,
+                top_records=args.completion_top_records,
+                beam_width=args.completion_beam_width,
+            )
             completion_rows.append({"EXAMPLE_ID": example_id, "PREDICTED_SEQUENCE": "|".join(suffix)})
 
         write_rows(args.out_dir / "nextstep.csv", ["EXAMPLE_ID", "RANK_1", "RANK_2", "RANK_3", "RANK_4", "RANK_5"], next_rows)
@@ -80,4 +127,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

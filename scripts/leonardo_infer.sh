@@ -11,6 +11,12 @@ mkdir -p artifacts/slurm submissions
 
 VALID_INPUT="${VALID_INPUT:-data/dev/eval_input_valid.csv}"
 ANOMALY_INPUT="${ANOMALY_INPUT:-data/dev/eval_input_anomaly.csv}"
+COMPLETION_MODE="${COMPLETION_MODE:-ensemble}"
+TRANSFORMER_DEVICE="${TRANSFORMER_DEVICE:-cpu}"
 
-python -m industrial_ai.infer --valid-input "${VALID_INPUT}" --anomaly-input "${ANOMALY_INPUT}" --out-dir submissions
-
+python -m industrial_ai.infer \
+  --valid-input "${VALID_INPUT}" \
+  --anomaly-input "${ANOMALY_INPUT}" \
+  --completion-mode "${COMPLETION_MODE}" \
+  --transformer-device "${TRANSFORMER_DEVICE}" \
+  --out-dir submissions

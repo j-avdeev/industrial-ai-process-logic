@@ -12,6 +12,7 @@ The repository is built around the official Industrial AI starter pack from `Lum
 - `industrial_ai.make_devset`: local dev eval creation
 - `industrial_ai.infer`: submission CSV generation
 - `industrial_ai.metrics`: local dev scoring
+- `industrial_ai.compare_completion`: compare completion strategies
 - `industrial_ai.train`: optional step-token transformer training
 - Leonardo scripts in `scripts/`
 
@@ -50,6 +51,7 @@ When organizers provide the official eval files, copy them into `data/eval/` and
 python -m industrial_ai.infer \
   --valid-input data/eval/eval_input_valid.csv \
   --anomaly-input data/eval/eval_input_anomaly.csv \
+  --completion-mode ensemble \
   --out-dir submissions
 ```
 
@@ -69,6 +71,8 @@ python -m industrial_ai.generate_extra --family igbt --count 10000 --seed 102 --
 python -m industrial_ai.generate_extra --family ic --count 10000 --seed 103 --output data/generated/IC_extra.csv
 ```
 
+For leaderboard completion quality, use at least 10k extra sequences per family locally, and 50k-150k per family on Leonardo if runtime allows. No external fab data is required; the official generator is the intended extra data source.
+
 Train a model:
 
 ```bash
@@ -77,13 +81,39 @@ python -m industrial_ai.train --model-size tiny --epochs 4 --batch-size 64 --dev
 
 Supported model sizes: `tiny`, `small`, `medium`.
 
+Use a trained checkpoint for candidate reranking:
+
+```bash
+python -m industrial_ai.infer \
+  --valid-input data/eval/eval_input_valid.csv \
+  --anomaly-input data/eval/eval_input_anomaly.csv \
+  --completion-mode ensemble \
+  --checkpoint checkpoints/small/model.pt \
+  --transformer-device cuda \
+  --out-dir submissions
+```
+
+Compare completion modes on a local dev set:
+
+```bash
+python -m industrial_ai.compare_completion
+```
+
+Completion modes:
+
+- `prefix`: original exact-prefix/greedy baseline
+- `retrieval`: longest-prefix and recent-context candidate retrieval
+- `beam`: retrieval plus n-gram beam fallback
+- `ensemble`: retrieval + beam + validator penalties + optional transformer checkpoint reranking
+
 ## Leonardo
 
 Copy `.env.example` to `.env` locally and fill your Leonardo username/password outside git. Stage this repo on Leonardo, then use:
 
 ```bash
-sbatch scripts/leonardo_generate.sh
+sbatch --export=COUNT_PER_FAMILY=10000 scripts/leonardo_generate.sh
 sbatch --export=MODEL_SIZE=tiny,EPOCHS=6 scripts/leonardo_train.sh
+sbatch --export=EPOCHS=6 scripts/leonardo_train_scaling.sh
 sbatch --export=VALID_INPUT=data/eval/eval_input_valid.csv,ANOMALY_INPUT=data/eval/eval_input_anomaly.csv scripts/leonardo_infer.sh
 ```
 
@@ -126,4 +156,3 @@ Track-specific repo deliverables:
 Official challenge data and grammar are copied from:
 
 https://github.com/Lumos-Data/zero_one_hack_01/tree/main/tracks/industrial-infineon/training_data
-

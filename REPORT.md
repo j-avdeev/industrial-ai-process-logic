@@ -15,6 +15,7 @@ The challenge asks whether models can learn process logic in long semiconductor 
 - Use the official process grammar and validator as a strong reliability layer.
 - Use n-gram and nearest-prefix baselines for immediate reproducible predictions.
 - Use deterministic validator output for anomaly detection and rule attribution.
+- Improve completion as candidate generation plus reranking: retrieval from a larger generated corpus, n-gram beam fallback, official validation, length penalties, and optional transformer checkpoint scoring.
 - Provide optional PyTorch transformer training for scaling experiments across `tiny`, `small`, and `medium` configurations.
 
 ## Current Results
@@ -24,8 +25,9 @@ The repo is ready to run local synthetic dev evaluation:
 ```bash
 python -m industrial_ai.prepare
 python -m industrial_ai.make_devset --valid-per-family 5 --anomaly-valid-per-family 5 --anomaly-invalid-per-family 5
-python -m industrial_ai.infer
+python -m industrial_ai.infer --completion-mode ensemble
 python -m industrial_ai.metrics
+python -m industrial_ai.compare_completion
 ```
 
 Official leaderboard metrics require the organizer-provided eval files and ground-truth scoring script. The final CSV outputs are produced under `submissions/`.
@@ -39,6 +41,7 @@ See `README.md` for setup, local smoke run, official eval inference, neural trai
 - The official validator gives a robust anomaly detector for known process-rule violations.
 - Long-format sequence data is simple to convert into family-conditioned token sequences.
 - A prefix index is a strong completion baseline when generated corpora contain close route variants.
+- Larger generated corpora should improve completion because the retrieval/reranking path has more valid suffix candidates.
 
 ## What Did Not Work Yet
 
@@ -59,4 +62,3 @@ See `README.md` for setup, local smoke run, official eval inference, neural trai
 - Official challenge data: Lumos Data / Zero One Hack Track 1 Industrial AI.
 - Core implementation: Python stdlib baseline and optional PyTorch model.
 - Compute target: CINECA Leonardo GPU cluster.
-
