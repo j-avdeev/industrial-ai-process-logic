@@ -1,0 +1,6 @@
+# Baseline, data prep, and local metrics use only Python stdlib.
+# These packages enable the optional neural model training and plots.
+torch>=2.2
+matplotlib>=3.8
+tqdm>=4.66
+
