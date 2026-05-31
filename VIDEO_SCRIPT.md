@@ -33,9 +33,21 @@ Voiceover:
 
 Run:
 
-```bash
-python -m industrial_ai.make_devset --out-dir artifacts/video_demo/dev --valid-per-family 2 --anomaly-valid-per-family 2 --anomaly-invalid-per-family 2
-python -m industrial_ai.infer --valid-input artifacts/video_demo/dev/eval_input_valid.csv --anomaly-input artifacts/video_demo/dev/eval_input_anomaly.csv --completion-mode ensemble --out-dir artifacts/video_demo/submissions
+```powershell
+cd C:\Users\j-avd\Documents\Hackathon29.05\industrial-ai-process-logic
+
+python -m industrial_ai.make_devset `
+  --out-dir artifacts/video_demo/dev `
+  --valid-per-family 2 `
+  --anomaly-valid-per-family 2 `
+  --anomaly-invalid-per-family 2
+
+python -m industrial_ai.infer `
+  --valid-input artifacts/video_demo/dev/eval_input_valid.csv `
+  --anomaly-input artifacts/video_demo/dev/eval_input_anomaly.csv `
+  --completion-mode ensemble `
+  --out-dir artifacts/video_demo/submissions
+
 python -m industrial_ai.metrics --dev-dir artifacts/video_demo/dev --pred-dir artifacts/video_demo/submissions
 ```
 
