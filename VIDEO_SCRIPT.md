@@ -4,25 +4,32 @@ Target length: 2 minutes maximum. Format: MP4, 1080p, with audio.
 
 ## Tally description
 
-Two-minute walkthrough of Industrial AI Process Logic: a reproducible Track 1 submission covering all three task paths, next-step prediction, sequence completion, and anomaly detection, with local smoke evidence, packaging verification, and a clearly stated boundary that no final Leonardo-trained checkpoint is claimed. Repository: https://github.com/j-avdeev/industrial-ai-process-logic.
+Two-minute walkthrough by Coding Club, Evgenii Avdeev and Swathi Dutt, for Track 1: Learning and Benchmarking Process Logic. The demo presents the current submitted result: a reproducible Industrial AI Process Logic pipeline covering next-step prediction, sequence completion, and anomaly detection, with local smoke evidence, packaging verification, and a clear boundary that no final Leonardo-trained checkpoint or official score is claimed. Repository: https://github.com/j-avdeev/industrial-ai-process-logic.
 
 ## Recording plan
 
-0:00-0:15 - Problem
+0:00-0:10 - Slide 1: Team and track
 
-Show `README.md` and `data/raw/training_data/`.
-
-Voiceover:
-"The task is to learn semiconductor process logic. We need to predict next steps, complete partial routes, and detect invalid sequences across MOSFET, IGBT, and IC families without breaking the official process rules."
-
-0:15-0:35 - Pipeline
-
-Show `industrial_ai/` and the local smoke command.
+Show `SLIDES.pdf` slide 1.
 
 Voiceover:
-"The repo is organized as a reproducible pipeline: data prep, official-generator augmentation, grammar-aware inference, optional transformer training, reranker comparison, validation, and package verification."
+"We are Coding Club: Evgenii Avdeev and Swathi Dutt. This is Track 1, Learning and Benchmarking Process Logic."
 
-0:35-1:05 - Live run
+0:10-0:25 - Slides 2-3: Project and problem
+
+Show slides 2 and 3, then briefly show `README.md`.
+
+Voiceover:
+"Our submission is Industrial AI Process Logic. The goal is to model long semiconductor process routes, predict plausible next steps, complete partial routes, and detect invalid sequences across MOSFET, IGBT, and IC families."
+
+0:25-0:45 - Slides 4-5: Approach and local task coverage
+
+Show slides 4 and 5, plus `industrial_ai/infer.py`.
+
+Voiceover:
+"The implementation treats full process steps as tokens, conditions on product family, and uses official grammar and validator logic as a reliability layer. The local inference path implements all three submitted tasks: nextstep, completion, and anomaly."
+
+0:45-1:10 - Live smoke evidence
 
 Run:
 
@@ -33,25 +40,25 @@ python -m industrial_ai.metrics --dev-dir artifacts/video_demo/dev --pred-dir ar
 ```
 
 Voiceover:
-"This creates a small dev set, runs the same inference entry point used for final CSV generation, and prints local metrics for all three submitted tasks. Next-step has a working baseline, anomaly detection is strong on smoke data, and completion runs end to end even though exact match is still weak on tiny data."
+"This creates a small dev set, generates all three submission CSVs, and prints local metrics. Next-step has a working baseline, anomaly detection is strong on smoke data, and completion runs end to end even though exact match is weak on tiny data."
 
-1:05-1:30 - Evidence and packaging
+1:10-1:28 - Slides 6-7: Prepared Leonardo path and verification
 
-Show `LEONARDO_RUNBOOK.md`, `industrial_ai/package_submission.py`, and `industrial_ai/verify_returned_package.py`.
-
-Voiceover:
-"The repository also includes the prepared Leonardo path: source bundling, launch scripts, checkpoint audits, package creation, and returned-package verification. In this presentation, I claim the current auditable pipeline and local evidence, not a completed Leonardo return package."
-
-1:30-1:50 - Honest status
-
-Show `REPORT.md` and `SUBMISSION_CHECKLIST.md`.
+Show slides 6 and 7, then `LEONARDO_RUNBOOK.md`.
 
 Voiceover:
-"The mature result today is the completed task pipeline plus the auditable packaging and handoff. All three submitted task paths are implemented. The limitation is clear: final official scores and a final trained checkpoint are not claimed in the current evidence."
+"The repository includes a prepared Leonardo path: source bundling, launch scripts, checkpoint audits, package creation, and returned-package verification. The verification code binds hashes, run manifests, checkpoint evidence, and package contents so the final artifacts can be audited."
 
-1:50-2:00 - Close
+1:28-1:45 - Slide 8: Task completion status
 
-Show `SLIDES.pdf` and the repository URL.
+Show slide 8 and `REPORT.md`.
 
 Voiceover:
-"The repo is public, MIT licensed, documented, and ready for submission as the current Track 1 result: a reproducible solution covering all three tasks, with final benchmark-quality training left outside the claimed result."
+"The current result is a completed reproducible pipeline for Track 1 Tasks 1 through 3. I do not claim a final official score, completed Leonardo return package, or final selected checkpoint in the current evidence."
+
+1:45-2:00 - Slide 9: Current submission result
+
+Show slide 9 and the GitHub repository URL.
+
+Voiceover:
+"The submitted result is a public MIT repository with README, report, dependency manifest, slides, and this demo script. Technically, all three task paths run locally and produce submission CSVs; final benchmark-quality training is outside the claimed result."
