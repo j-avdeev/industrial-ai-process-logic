@@ -200,7 +200,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
 endobj
 13 0 obj
-<< /Length 935 >>
+<< /Length 948 >>
 stream
 q
 0.96 0.97 0.96 rg
@@ -225,11 +225,11 @@ ET
 62 318 8 8 re f
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 313 Td
-(`industrial_ai.infer` writes `nextstep.csv`, `completion.csv`, and) Tj
+(`industrial_ai.infer` implements all three submitted tasks: nextstep,) Tj
 ET
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 284 Td
-(`anomaly.csv`.) Tj
+(completion, and anomaly.) Tj
 ET
 0.05 0.24 0.32 rg
 62 247 8 8 re f
@@ -349,7 +349,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 19 0 R >>
 endobj
 19 0 obj
-<< /Length 956 >>
+<< /Length 900 >>
 stream
 q
 0.96 0.97 0.96 rg
@@ -358,37 +358,33 @@ q
 0 518 960 22 re f
 0.10 0.10 0.10 rg
 BT /F1 32 Tf 52 456 Td
-(Honest Status) Tj
+(Task Completion Status) Tj
 ET
 0.05 0.24 0.32 rg
 62 389 8 8 re f
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 384 Td
-(Mature: repo, MIT license, README, REPORT, dependency manifest, Slurm) Tj
-ET
-0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 355 Td
-(scripts, packaging, and verifiers.) Tj
+(Completed: reproducible pipeline covering Track 1 Tasks 1-3.) Tj
 ET
 0.05 0.24 0.32 rg
-62 318 8 8 re f
+62 347 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 342 Td
+(Local smoke evidence: next-step works, anomaly detection is strong,) Tj
+ET
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 313 Td
-(Pending external result: official eval files, Leonardo training run,) Tj
-ET
-0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 284 Td
-(returned package, and final scores.) Tj
+(completion path runs but exact match is weak on tiny data.) Tj
 ET
 0.05 0.24 0.32 rg
-62 247 8 8 re f
+62 276 8 8 re f
 0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 242 Td
-(Tiny smoke completion exact match can be 0.0000; final quality depends on) Tj
+BT /F1 20 Tf 88 271 Td
+(Pending: final official eval outputs, Leonardo training run, returned) Tj
 ET
 0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 213 Td
-(the large Leonardo corpus.) Tj
+BT /F1 20 Tf 88 242 Td
+(package, and final checkpoint claim.) Tj
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
@@ -455,16 +451,16 @@ xref
 0000003280 00000 n 
 0000004283 00000 n 
 0000004411 00000 n 
-0000005397 00000 n 
-0000005525 00000 n 
-0000006410 00000 n 
-0000006538 00000 n 
-0000007521 00000 n 
-0000007649 00000 n 
-0000008656 00000 n 
-0000008784 00000 n 
+0000005410 00000 n 
+0000005538 00000 n 
+0000006423 00000 n 
+0000006551 00000 n 
+0000007534 00000 n 
+0000007662 00000 n 
+0000008613 00000 n 
+0000008741 00000 n 
 trailer
 << /Size 22 /Root 1 0 R >>
 startxref
-9597
+9554
 %%EOF

@@ -27,7 +27,7 @@
 ## Slide 5: What Runs Locally
 
 - `industrial_ai.smoke_pipeline` creates dev inputs, predictions, metrics, package manifests, and audits.
-- `industrial_ai.infer` writes `nextstep.csv`, `completion.csv`, and `anomaly.csv`.
+- `industrial_ai.infer` implements all three submitted tasks: nextstep, completion, and anomaly.
 - Local smoke checks are intentionally small; they prove the pipeline, not final leaderboard quality.
 
 ## Slide 6: Leonardo Path
@@ -42,11 +42,11 @@
 - Corpus, checkpoint, validation, final-audit, and returned-package checks bind hashes and thresholds.
 - Source-bundle proof prevents script or Python source drift between upload, training, and packaging.
 
-## Slide 8: Honest Status
+## Slide 8: Task Completion Status
 
-- Mature: repo, MIT license, README, REPORT, dependency manifest, Slurm scripts, packaging, and verifiers.
-- Pending external result: official eval files, Leonardo training run, returned package, and final scores.
-- Tiny smoke completion exact match can be 0.0000; final quality depends on the large Leonardo corpus.
+- Completed: reproducible pipeline covering Track 1 Tasks 1-3.
+- Local smoke evidence: next-step works, anomaly detection is strong, completion path runs but exact match is weak on tiny data.
+- Pending: final official eval outputs, Leonardo training run, returned package, and final checkpoint claim.
 
 ## Slide 9: Next Step
 

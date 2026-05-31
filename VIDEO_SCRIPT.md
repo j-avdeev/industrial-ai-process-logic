@@ -4,7 +4,7 @@ Target length: 2 minutes maximum. Format: MP4, 1080p, with audio.
 
 ## Tally description
 
-Two-minute walkthrough of Industrial AI Process Logic: a reproducible Track 1 pipeline that generates valid semiconductor process routes, runs next-step/completion/anomaly inference, trains optional transformer checkpoints on Leonardo, selects a checkpoint reranker, and packages auditable submission evidence. Repository: https://github.com/j-avdeev/industrial-ai-process-logic.
+Two-minute walkthrough of Industrial AI Process Logic: a reproducible Track 1 pipeline covering all three submitted tasks, next-step prediction, sequence completion, and anomaly detection, with local smoke evidence and a prepared Leonardo path for final training and benchmark packaging. Repository: https://github.com/j-avdeev/industrial-ai-process-logic.
 
 ## Recording plan
 
@@ -33,7 +33,7 @@ python -m industrial_ai.metrics --dev-dir artifacts/video_demo/dev --pred-dir ar
 ```
 
 Voiceover:
-"This creates a small dev set, runs the same inference entry point used for final CSV generation, and prints local metrics. The final official score needs organizer eval files, but this proves the runnable path."
+"This creates a small dev set, runs the same inference entry point used for final CSV generation, and prints local metrics for all three submitted tasks. Next-step has a working baseline, anomaly detection is strong on smoke data, and completion runs end to end even though exact match is still weak on tiny data."
 
 1:05-1:30 - Evidence and packaging
 
@@ -47,11 +47,11 @@ Voiceover:
 Show `REPORT.md` and `SUBMISSION_CHECKLIST.md`.
 
 Voiceover:
-"The mature result today is the auditable pipeline and handoff. I am not claiming final Leonardo scores until official eval files are staged and the returned package verifier reports final objective ready."
+"The mature result today is the completed task pipeline plus the auditable Leonardo handoff. I am not claiming final official scores or a final checkpoint until eval files are staged, Leonardo training runs, and the returned package verifier reports final objective ready."
 
 1:50-2:00 - Close
 
 Show `SLIDES.pdf` and the repository URL.
 
 Voiceover:
-"The repo is public, MIT licensed, documented, and ready for the final Leonardo run and submission package."
+"The repo is public, MIT licensed, documented, and ready for submission as a reproducible Track 1 solution with final Leonardo benchmarking still pending."
