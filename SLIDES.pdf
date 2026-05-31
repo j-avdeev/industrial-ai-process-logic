@@ -251,7 +251,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
 endobj
 15 0 obj
-<< /Length 834 >>
+<< /Length 906 >>
 stream
 q
 0.96 0.97 0.96 rg
@@ -260,33 +260,37 @@ q
 0 518 960 22 re f
 0.10 0.10 0.10 rg
 BT /F1 32 Tf 52 456 Td
-(Leonardo Path) Tj
+(Prepared Leonardo Path) Tj
 ET
 0.05 0.24 0.32 rg
 62 389 8 8 re f
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 384 Td
-(Generate 50k-150k valid sequences per product family with the official) Tj
+(Repository includes scripts to generate 50k-150k valid sequences per product) Tj
 ET
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 355 Td
-(generator.) Tj
+(family.) Tj
 ET
 0.05 0.24 0.32 rg
 62 318 8 8 re f
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 313 Td
-(Train tiny, small, and medium transformer checkpoints on CUDA.) Tj
+(Training path covers tiny, small, and medium transformer checkpoints on) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 284 Td
+(CUDA.) Tj
 ET
 0.05 0.24 0.32 rg
-62 276 8 8 re f
-0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 271 Td
-(Select a checkpoint reranker, run official inference, and package) Tj
-ET
+62 247 8 8 re f
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 242 Td
-(submissions plus evidence.) Tj
+(Packaging path records hashes, run manifests, checkpoint evidence, and) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 213 Td
+(verifier results.) Tj
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
@@ -349,7 +353,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 19 0 R >>
 endobj
 19 0 obj
-<< /Length 900 >>
+<< /Length 893 >>
 stream
 q
 0.96 0.97 0.96 rg
@@ -380,11 +384,11 @@ ET
 62 276 8 8 re f
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 271 Td
-(Pending: final official eval outputs, Leonardo training run, returned) Tj
+(Not claimed: final official score, completed Leonardo return package, or) Tj
 ET
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 242 Td
-(package, and final checkpoint claim.) Tj
+(final selected checkpoint.) Tj
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
@@ -396,7 +400,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 21 0 R >>
 endobj
 21 0 obj
-<< /Length 762 >>
+<< /Length 955 >>
 stream
 q
 0.96 0.97 0.96 rg
@@ -405,29 +409,37 @@ q
 0 518 960 22 re f
 0.10 0.10 0.10 rg
 BT /F1 32 Tf 52 456 Td
-(Next Step) Tj
+(Current Submission Result) Tj
 ET
 0.05 0.24 0.32 rg
 62 389 8 8 re f
 0.13 0.13 0.13 rg
 BT /F1 20 Tf 88 384 Td
-(Stage official eval CSVs and run the Leonardo readiness command.) Tj
+(Submitted result: public MIT repo with README, REPORT, dependency manifest,) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 355 Td
+(slides, and demo script.) Tj
 ET
 0.05 0.24 0.32 rg
-62 347 8 8 re f
+62 318 8 8 re f
 0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 342 Td
-(Submit the 50k or 150k-per-family full pipeline with CUDA training.) Tj
+BT /F1 20 Tf 88 313 Td
+(Technical result: all three Track 1 task paths run locally and produce) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 284 Td
+(submission CSVs.) Tj
 ET
 0.05 0.24 0.32 rg
-62 305 8 8 re f
+62 247 8 8 re f
 0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 300 Td
-(Verify `artifacts/leonardo_return_packet.zip` before uploading the final CSV) Tj
+BT /F1 20 Tf 88 242 Td
+(Boundary: final benchmark-quality checkpoint and official scores are outside) Tj
 ET
 0.13 0.13 0.13 rg
-BT /F1 20 Tf 88 271 Td
-(package.) Tj
+BT /F1 20 Tf 88 213 Td
+(the current submitted evidence.) Tj
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
@@ -453,14 +465,14 @@ xref
 0000004411 00000 n 
 0000005410 00000 n 
 0000005538 00000 n 
-0000006423 00000 n 
-0000006551 00000 n 
-0000007534 00000 n 
-0000007662 00000 n 
-0000008613 00000 n 
-0000008741 00000 n 
+0000006495 00000 n 
+0000006623 00000 n 
+0000007606 00000 n 
+0000007734 00000 n 
+0000008678 00000 n 
+0000008806 00000 n 
 trailer
 << /Size 22 /Root 1 0 R >>
 startxref
-9554
+9812
 %%EOF

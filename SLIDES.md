@@ -30,11 +30,11 @@
 - `industrial_ai.infer` implements all three submitted tasks: nextstep, completion, and anomaly.
 - Local smoke checks are intentionally small; they prove the pipeline, not final leaderboard quality.
 
-## Slide 6: Leonardo Path
+## Slide 6: Prepared Leonardo Path
 
-- Generate 50k-150k valid sequences per product family with the official generator.
-- Train tiny, small, and medium transformer checkpoints on CUDA.
-- Select a checkpoint reranker, run official inference, and package submissions plus evidence.
+- Repository includes scripts to generate 50k-150k valid sequences per product family.
+- Training path covers tiny, small, and medium transformer checkpoints on CUDA.
+- Packaging path records hashes, run manifests, checkpoint evidence, and verifier results.
 
 ## Slide 7: Verification
 
@@ -46,10 +46,10 @@
 
 - Completed: reproducible pipeline covering Track 1 Tasks 1-3.
 - Local smoke evidence: next-step works, anomaly detection is strong, completion path runs but exact match is weak on tiny data.
-- Pending: final official eval outputs, Leonardo training run, returned package, and final checkpoint claim.
+- Not claimed: final official score, completed Leonardo return package, or final selected checkpoint.
 
-## Slide 9: Next Step
+## Slide 9: Current Submission Result
 
-- Stage official eval CSVs and run the Leonardo readiness command.
-- Submit the 50k or 150k-per-family full pipeline with CUDA training.
-- Verify `artifacts/leonardo_return_packet.zip` before uploading the final CSV package.
+- Submitted result: public MIT repo with README, REPORT, dependency manifest, slides, and demo script.
+- Technical result: all three Track 1 task paths run locally and produce submission CSVs.
+- Boundary: final benchmark-quality checkpoint and official scores are outside the current submitted evidence.

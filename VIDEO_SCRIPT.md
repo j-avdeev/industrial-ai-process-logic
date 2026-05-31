@@ -4,7 +4,7 @@ Target length: 2 minutes maximum. Format: MP4, 1080p, with audio.
 
 ## Tally description
 
-Two-minute walkthrough of Industrial AI Process Logic: a reproducible Track 1 pipeline covering all three submitted tasks, next-step prediction, sequence completion, and anomaly detection, with local smoke evidence and a prepared Leonardo path for final training and benchmark packaging. Repository: https://github.com/j-avdeev/industrial-ai-process-logic.
+Two-minute walkthrough of Industrial AI Process Logic: a reproducible Track 1 submission covering all three task paths, next-step prediction, sequence completion, and anomaly detection, with local smoke evidence, packaging verification, and a clearly stated boundary that no final Leonardo-trained checkpoint is claimed. Repository: https://github.com/j-avdeev/industrial-ai-process-logic.
 
 ## Recording plan
 
@@ -40,18 +40,18 @@ Voiceover:
 Show `LEONARDO_RUNBOOK.md`, `industrial_ai/package_submission.py`, and `industrial_ai/verify_returned_package.py`.
 
 Voiceover:
-"The Leonardo path scales the corpus to 50k to 150k valid sequences per family, trains tiny, small, and medium checkpoints on CUDA, selects a checkpoint reranker, and packages submissions with hashes, run manifests, checkpoint summaries, and audit evidence."
+"The repository also includes the prepared Leonardo path: source bundling, launch scripts, checkpoint audits, package creation, and returned-package verification. In this presentation, I claim the current auditable pipeline and local evidence, not a completed Leonardo return package."
 
 1:30-1:50 - Honest status
 
 Show `REPORT.md` and `SUBMISSION_CHECKLIST.md`.
 
 Voiceover:
-"The mature result today is the completed task pipeline plus the auditable Leonardo handoff. I am not claiming final official scores or a final checkpoint until eval files are staged, Leonardo training runs, and the returned package verifier reports final objective ready."
+"The mature result today is the completed task pipeline plus the auditable packaging and handoff. All three submitted task paths are implemented. The limitation is clear: final official scores and a final trained checkpoint are not claimed in the current evidence."
 
 1:50-2:00 - Close
 
 Show `SLIDES.pdf` and the repository URL.
 
 Voiceover:
-"The repo is public, MIT licensed, documented, and ready for submission as a reproducible Track 1 solution with final Leonardo benchmarking still pending."
+"The repo is public, MIT licensed, documented, and ready for submission as the current Track 1 result: a reproducible solution covering all three tasks, with final benchmark-quality training left outside the claimed result."

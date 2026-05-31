@@ -96,12 +96,12 @@ See `README.md` for setup, local smoke run, official eval inference, neural trai
 - Transformer checkpoints are not committed yet; they should be trained on Leonardo and referenced here after runs finish.
 - The current neural model is intentionally compact and should be tuned with generated data volume, model size, and epoch sweeps.
 
-## Next 36-Hour Improvements
+## Remaining Work Not Claimed In This Submission
 
-- Generate 50k to 150k additional valid sequences per family and rerun scaling experiments.
-- Train `tiny`, `small`, and `medium` models on Leonardo and compare metrics.
-- Add plots for the per-family metric breakdowns in `artifacts/`.
-- Record a short baseline-vs-trained demo using identical inputs.
+- Run the 50k-150k-per-family Leonardo generation and training flow as a real returned package.
+- Train and compare `tiny`, `small`, and `medium` checkpoints on CUDA with returned evidence.
+- Select and verify a final checkpoint only after returned-package verification passes.
+- Add final loss curves, official metrics, and per-family breakdowns when those artifacts exist.
 
 ## Credits & Dependencies
 
