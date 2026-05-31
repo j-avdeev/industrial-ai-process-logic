@@ -4,10 +4,17 @@ __pycache__/
 *.py[cod]
 
 # Runtime outputs
-artifacts/
+artifacts/*
+!artifacts/slurm/
+artifacts/slurm/*
+!artifacts/slurm/.gitkeep
 checkpoints/
 data/generated/
 data/dev/
+data/eval/*.csv
+!data/eval/.gitkeep
+submissions/*.csv
+submissions/inference_summary.json
 
 # Large or machine-local files
 *.pt

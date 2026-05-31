@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import heapq
+import json
 import math
 from collections import Counter, defaultdict
 from dataclasses import dataclass
@@ -102,6 +103,36 @@ class TransformerSuffixScorer:
             print(f"[WARN] Transformer scoring failed once: {exc}")
             self.available = False
             return 0.0
+
+    def score_next(self, family: str, partial: list[str], candidates: list[str]) -> dict[str, float]:
+        if not self.available or self.model is None or self.torch is None:
+            return {}
+
+        family_token = f"<FAMILY_{family}>"
+        if family_token not in self.token_to_id:
+            return {}
+        tokens = ["<BOS>", family_token] + partial
+        if any(token not in self.token_to_id for token in tokens):
+            return {}
+        if len(tokens) > self.max_len:
+            tokens = tokens[:2] + tokens[-(self.max_len - 2):]
+
+        ids = [self.token_to_id[token] for token in tokens]
+        torch = self.torch
+        x = torch.tensor(ids, dtype=torch.long, device=self.device).unsqueeze(0)
+        try:
+            with torch.no_grad():
+                logits = self.model(x)[0, -1]
+                log_probs = torch.log_softmax(logits, dim=-1)
+                scores: dict[str, float] = {}
+                for token in candidates:
+                    token_id = self.token_to_id.get(token)
+                    scores[token] = float(log_probs[token_id].item()) if token_id is not None else -25.0
+                return scores
+        except Exception as exc:  # pragma: no cover - optional dependency path
+            print(f"[WARN] Transformer next-step scoring failed once: {exc}")
+            self.available = False
+            return {}
 
 
 class CompletionEngine:
@@ -297,6 +328,19 @@ class CompletionEngine:
         rescored.sort(key=lambda item: item.score, reverse=True)
         return rescored
 
+    def rerank_next(self, family: str, partial: list[str], candidates: list[str], k: int = 5) -> list[str]:
+        if not self.scorer or not self.scorer.available or not candidates:
+            return candidates[:k]
+        transformer_scores = self.scorer.score_next(family, partial, candidates)
+        if not transformer_scores:
+            return candidates[:k]
+        rescored = []
+        for idx, token in enumerate(candidates):
+            baseline_score = len(candidates) - idx
+            rescored.append((baseline_score + transformer_scores.get(token, -25.0) * 2.0, token))
+        rescored.sort(reverse=True)
+        return [token for _, token in rescored[:k]]
+
     def _best_exact_prefix(self, family: str, partial: list[str]) -> list[str] | None:
         best: SequenceRecord | None = None
         for record in self.by_family.get(family, []):
@@ -373,6 +417,28 @@ class CompletionEngine:
 
 
 def default_checkpoint_path() -> Path:
+    selection_path = PROJECT_ROOT / "artifacts" / "reranker_compare" / "metrics.json"
+    if selection_path.exists():
+        try:
+            payload = json.loads(selection_path.read_text(encoding="utf-8"))
+            for row in payload.get("runs", []):
+                if row.get("reranker") != payload.get("best_reranker"):
+                    continue
+                checkpoint = str(row.get("checkpoint", "")).strip()
+                if not checkpoint:
+                    return PROJECT_ROOT / "checkpoints" / "baseline-selected" / "model.pt"
+                if row.get("available") is not True:
+                    return PROJECT_ROOT / "checkpoints" / "baseline-selected" / "model.pt"
+                if "selection_eligible" in row and row.get("selection_eligible") is not True:
+                    return PROJECT_ROOT / "checkpoints" / "baseline-selected" / "model.pt"
+                path = Path(checkpoint)
+                if not path.is_absolute():
+                    path = PROJECT_ROOT / path
+                if path.exists():
+                    return path
+        except (OSError, json.JSONDecodeError, TypeError):
+            pass
+
     for size in ("medium", "small", "tiny"):
         path = PROJECT_ROOT / "checkpoints" / size / "model.pt"
         if path.exists():

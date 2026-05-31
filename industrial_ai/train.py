@@ -4,10 +4,12 @@ import argparse
 import json
 import math
 import random
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
-from .data import load_training_sequences, read_long_sequences
+from .data import corpus_fingerprint, load_corpus
+from .hashing import file_sha256
 from .paths import DEFAULT_DATA_DIR, PROJECT_ROOT
 
 
@@ -36,14 +38,6 @@ def _require_torch():
             "PyTorch is required for training. Install requirements.txt or use the Leonardo module stack."
         ) from exc
     return torch, nn
-
-
-def load_corpus(data_dir: Path, generated_dir: Path | None = None):
-    records = load_training_sequences(data_dir)
-    if generated_dir and generated_dir.exists():
-        for path in generated_dir.glob("*.csv"):
-            records.extend(read_long_sequences(path))
-    return records
 
 
 def encode(records) -> EncodedCorpus:
@@ -110,6 +104,117 @@ def make_batches(torch, sequences: list[list[int]], batch_size: int, pad_id: int
         yield x, y
 
 
+def _write_loss_curve(log_rows: list[dict[str, float]], path: Path) -> bool:
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+    except ImportError:
+        return False
+
+    epochs = [int(row["epoch"]) for row in log_rows]
+    losses = [float(row["loss"]) for row in log_rows]
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.plot(epochs, losses, marker="o")
+    ax.set_xlabel("epoch")
+    ax.set_ylabel("loss")
+    ax.set_title("Training loss")
+    ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+    return True
+
+
+def _source_bundle_summary(readiness_path: Path, require_source_bundle_proof: bool) -> dict[str, object]:
+    if not require_source_bundle_proof:
+        return {
+            "required": False,
+            "verified": False,
+            "bundle_sha256": "",
+            "readiness_path": str(readiness_path),
+        }
+    if not readiness_path.exists():
+        raise SystemExit(f"Missing Leonardo readiness source-bundle evidence: {readiness_path}")
+    try:
+        readiness = json.loads(readiness_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"Leonardo readiness source-bundle evidence is not readable: {readiness_path} ({exc})")
+    required = readiness.get("require_source_bundle") is True
+    source_bundle = readiness.get("source_bundle", {})
+    if not isinstance(source_bundle, dict):
+        source_bundle = {}
+    bundle_sha256 = str(source_bundle.get("bundle_sha256", "") or "")
+    verified = source_bundle.get("verified") is True
+    if not required:
+        raise SystemExit("Leonardo readiness did not require source-bundle proof")
+    if not verified or not bundle_sha256:
+        raise SystemExit("Leonardo readiness does not contain a verified source-bundle SHA")
+    return {
+        "required": True,
+        "verified": True,
+        "bundle_sha256": bundle_sha256,
+        "readiness_path": str(readiness_path),
+    }
+
+
+def _is_complete_training_run(
+    run_dir: Path,
+    model_size: str,
+    epochs: int,
+    batch_size: int,
+    lr: float,
+    seed: int,
+    requested_device: str,
+    require_device: bool,
+    config: dict[str, int],
+    records_count: int,
+    family_counts: Counter[str],
+    fingerprint: str,
+    source_bundle_sha256: str,
+) -> bool:
+    model_path = run_dir / "model.pt"
+    summary_path = run_dir / "train_summary.json"
+    log_path = run_dir / "train_log.json"
+    if not model_path.exists() or not summary_path.exists() or not log_path.exists():
+        return False
+    try:
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        log_rows = json.loads(log_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    if summary.get("model_size") != model_size:
+        return False
+    if summary.get("config") != config:
+        return False
+    if int(summary.get("epochs", -1)) != epochs:
+        return False
+    if int(summary.get("batch_size", -1)) != batch_size:
+        return False
+    if float(summary.get("lr", -1.0)) != lr:
+        return False
+    if int(summary.get("seed", -1)) != seed:
+        return False
+    if require_device and summary.get("device") != requested_device:
+        return False
+    if int(summary.get("num_sequences", -1)) != records_count:
+        return False
+    if summary.get("model_sha256") != file_sha256(model_path):
+        return False
+    if summary.get("train_log_sha256") != file_sha256(log_path):
+        return False
+    if summary.get("corpus_fingerprint") != fingerprint:
+        return False
+    if summary.get("family_counts") != dict(sorted(family_counts.items())):
+        return False
+    if source_bundle_sha256 and summary.get("source_bundle_sha256") != source_bundle_sha256:
+        return False
+    if summary.get("final_loss") is None:
+        return False
+    return isinstance(log_rows, list) and len(log_rows) >= epochs
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Train a step-token transformer.")
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR)
@@ -121,18 +226,67 @@ def main() -> None:
     parser.add_argument("--lr", type=float, default=3e-4)
     parser.add_argument("--seed", type=int, default=13)
     parser.add_argument("--device", default="cuda")
+    parser.add_argument(
+        "--require-device",
+        action="store_true",
+        help="Fail instead of falling back when the requested device is unavailable.",
+    )
+    parser.add_argument(
+        "--skip-if-complete",
+        action="store_true",
+        help="Reuse an existing matching checkpoint, train log, and train summary.",
+    )
+    parser.add_argument(
+        "--readiness",
+        type=Path,
+        default=PROJECT_ROOT / "artifacts" / "leonardo_readiness.json",
+        help="Leonardo readiness JSON used to bind source-bundle identity into training evidence.",
+    )
+    parser.add_argument(
+        "--require-source-bundle-proof",
+        action="store_true",
+        help="Fail unless readiness proves a verified source-bundle SHA; matching checkpoints must carry it.",
+    )
     args = parser.parse_args()
+    requested_device = args.device
+
+    records = load_corpus(args.data_dir, args.generated_dir)
+    family_counts = Counter(record.family for record in records)
+    fingerprint = corpus_fingerprint(records)
+    config = MODEL_CONFIGS[args.model_size]
+    source_bundle = _source_bundle_summary(args.readiness, args.require_source_bundle_proof)
+    source_bundle_sha256 = str(source_bundle.get("bundle_sha256", "") or "")
+    run_dir = args.out_dir / args.model_size
+    if args.skip_if_complete and _is_complete_training_run(
+        run_dir,
+        args.model_size,
+        args.epochs,
+        args.batch_size,
+        args.lr,
+        args.seed,
+        requested_device,
+        args.require_device,
+        config,
+        len(records),
+        family_counts,
+        fingerprint,
+        source_bundle_sha256,
+    ):
+        print(f"Reusing complete training run at {run_dir}")
+        return
 
     torch, nn = _require_torch()
     rng = random.Random(args.seed)
     torch.manual_seed(args.seed)
+    device_fallback = False
     if args.device == "cuda" and not torch.cuda.is_available():
+        if args.require_device:
+            raise SystemExit("CUDA was requested with --require-device, but torch.cuda.is_available() is false")
         args.device = "cpu"
+        device_fallback = True
 
-    records = load_corpus(args.data_dir, args.generated_dir)
     corpus = encode(records)
     pad_id = corpus.token_to_id["<PAD>"]
-    config = MODEL_CONFIGS[args.model_size]
     model = build_model(torch, nn, len(corpus.id_to_token), corpus.max_len, config).to(args.device)
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=0.01)
     loss_fn = nn.CrossEntropyLoss(ignore_index=pad_id)
@@ -160,8 +314,36 @@ def main() -> None:
         log_rows.append({"epoch": epoch, "loss": avg_loss, "perplexity": ppl})
         print(f"epoch={epoch} loss={avg_loss:.4f} ppl={ppl:.2f}")
 
-    run_dir = args.out_dir / args.model_size
     run_dir.mkdir(parents=True, exist_ok=True)
+    summary = {
+        "model_size": args.model_size,
+        "config": config,
+        "epochs": args.epochs,
+        "batch_size": args.batch_size,
+        "lr": args.lr,
+        "seed": args.seed,
+        "requested_device": requested_device,
+        "device": args.device,
+        "device_fallback": device_fallback,
+        "data_dir": str(args.data_dir),
+        "generated_dir": str(args.generated_dir),
+        "num_sequences": len(records),
+        "corpus_fingerprint": fingerprint,
+        "family_counts": dict(sorted(family_counts.items())),
+        "source_bundle_sha256": source_bundle_sha256,
+        "source_bundle_required": source_bundle.get("required") is True,
+        "source_bundle_verified": source_bundle.get("verified") is True,
+        "source_bundle_readiness_path": source_bundle.get("readiness_path", ""),
+        "num_tokens": sum(len(seq) for seq in corpus.sequences),
+        "vocab_size": len(corpus.id_to_token),
+        "max_len": corpus.max_len,
+        "final_loss": log_rows[-1]["loss"] if log_rows else None,
+        "final_perplexity": log_rows[-1]["perplexity"] if log_rows else None,
+    }
+    model_path = run_dir / "model.pt"
+    log_path = run_dir / "train_log.json"
+    log_path.write_text(json.dumps(log_rows, indent=2), encoding="utf-8")
+    summary["train_log_sha256"] = file_sha256(log_path)
     torch.save({
         "model_state": model.state_dict(),
         "config": config,
@@ -169,11 +351,17 @@ def main() -> None:
         "token_to_id": corpus.token_to_id,
         "id_to_token": corpus.id_to_token,
         "model_size": args.model_size,
-    }, run_dir / "model.pt")
-    (run_dir / "train_log.json").write_text(json.dumps(log_rows, indent=2), encoding="utf-8")
+        "train_summary": summary,
+    }, model_path)
+    summary["model_sha256"] = file_sha256(model_path)
+    (run_dir / "train_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
+    if _write_loss_curve(log_rows, run_dir / "loss_curve.png"):
+        print(f"Wrote {run_dir / 'loss_curve.png'}")
+    else:
+        print("Skipped loss curve; matplotlib is not installed")
+    print(f"Wrote {run_dir / 'train_summary.json'}")
     print(f"Wrote {run_dir / 'model.pt'}")
 
 
 if __name__ == "__main__":
     main()
-

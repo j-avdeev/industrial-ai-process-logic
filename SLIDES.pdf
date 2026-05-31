@@ -1,0 +1,429 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R] /Count 8 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 842 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Industrial AI Process Logic) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Repository: https://github.com/j-avdeev/industrial-ai-process-logic.) Tj
+ET
+0.05 0.24 0.32 rg
+62 347 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 342 Td
+(Track 1 pipeline for semiconductor process next-step, completion, and) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 313 Td
+(anomaly tasks.) Tj
+ET
+0.05 0.24 0.32 rg
+62 276 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 271 Td
+(Built as a reproducible baseline, training, Leonardo, and packaging) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 242 Td
+(workflow.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (1/8) Tj ET
+Q
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 927 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Problem) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Process routes are long, family-specific, and constrained by hard) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 355 Td
+(fabrication rules.) Tj
+ET
+0.05 0.24 0.32 rg
+62 318 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 313 Td
+(A useful system must predict plausible next steps, complete partial routes,) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 284 Td
+(and flag invalid sequences.) Tj
+ET
+0.05 0.24 0.32 rg
+62 247 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 242 Td
+(The jury needs runnable code, honest metrics, and evidence that the final) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 213 Td
+(artifacts match the run.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (2/8) Tj ET
+Q
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 952 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Core Approach) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Treat full process steps as tokens and condition every prediction on MOSFET,) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 355 Td
+(IGBT, or IC family.) Tj
+ET
+0.05 0.24 0.32 rg
+62 318 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 313 Td
+(Use official grammar and validator logic as a reliability layer for) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 284 Td
+(anomalies and candidate filtering.) Tj
+ET
+0.05 0.24 0.32 rg
+62 247 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 242 Td
+(Combine retrieval, n-gram beam search, validator penalties, and optional) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 213 Td
+(transformer checkpoint reranking.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (3/8) Tj ET
+Q
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 935 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(What Runs Locally) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(`industrial_ai.smoke_pipeline` creates dev inputs, predictions, metrics,) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 355 Td
+(package manifests, and audits.) Tj
+ET
+0.05 0.24 0.32 rg
+62 318 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 313 Td
+(`industrial_ai.infer` writes `nextstep.csv`, `completion.csv`, and) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 284 Td
+(`anomaly.csv`.) Tj
+ET
+0.05 0.24 0.32 rg
+62 247 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 242 Td
+(Local smoke checks are intentionally small; they prove the pipeline, not) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 213 Td
+(final leaderboard quality.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (4/8) Tj ET
+Q
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 834 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Leonardo Path) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Generate 50k-150k valid sequences per product family with the official) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 355 Td
+(generator.) Tj
+ET
+0.05 0.24 0.32 rg
+62 318 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 313 Td
+(Train tiny, small, and medium transformer checkpoints on CUDA.) Tj
+ET
+0.05 0.24 0.32 rg
+62 276 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 271 Td
+(Select a checkpoint reranker, run official inference, and package) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 242 Td
+(submissions plus evidence.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (5/8) Tj ET
+Q
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 932 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Verification) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Preflight validates raw data, eval staging, PyTorch, CUDA, and expected) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 355 Td
+(input schemas.) Tj
+ET
+0.05 0.24 0.32 rg
+62 318 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 313 Td
+(Corpus, checkpoint, validation, final-audit, and returned-package checks) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 284 Td
+(bind hashes and thresholds.) Tj
+ET
+0.05 0.24 0.32 rg
+62 247 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 242 Td
+(Source-bundle proof prevents script or Python source drift between upload,) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 213 Td
+(training, and packaging.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (6/8) Tj ET
+Q
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 17 0 R >>
+endobj
+17 0 obj
+<< /Length 956 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Honest Status) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Mature: repo, MIT license, README, REPORT, dependency manifest, Slurm) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 355 Td
+(scripts, packaging, and verifiers.) Tj
+ET
+0.05 0.24 0.32 rg
+62 318 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 313 Td
+(Pending external result: official eval files, Leonardo training run,) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 284 Td
+(returned package, and final scores.) Tj
+ET
+0.05 0.24 0.32 rg
+62 247 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 242 Td
+(Tiny smoke completion exact match can be 0.0000; final quality depends on) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 213 Td
+(the large Leonardo corpus.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (7/8) Tj ET
+Q
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 19 0 R >>
+endobj
+19 0 obj
+<< /Length 762 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Next Step) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Stage official eval CSVs and run the Leonardo readiness command.) Tj
+ET
+0.05 0.24 0.32 rg
+62 347 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 342 Td
+(Submit the 50k or 150k-per-family full pipeline with CUDA training.) Tj
+ET
+0.05 0.24 0.32 rg
+62 305 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 300 Td
+(Verify `artifacts/leonardo_return_packet.zip` before uploading the final CSV) Tj
+ET
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 271 Td
+(package.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (8/8) Tj ET
+Q
+endstream
+endobj
+xref
+0 20
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000162 00000 n 
+0000000232 00000 n 
+0000000358 00000 n 
+0000001250 00000 n 
+0000001376 00000 n 
+0000002353 00000 n 
+0000002479 00000 n 
+0000003481 00000 n 
+0000003609 00000 n 
+0000004595 00000 n 
+0000004723 00000 n 
+0000005608 00000 n 
+0000005736 00000 n 
+0000006719 00000 n 
+0000006847 00000 n 
+0000007854 00000 n 
+0000007982 00000 n 
+trailer
+<< /Size 20 /Root 1 0 R >>
+startxref
+8795
+%%EOF

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 from collections import Counter
 from dataclasses import dataclass
@@ -84,6 +85,19 @@ def load_training_sequences(data_dir: Path | None = None) -> list[SequenceRecord
     return records
 
 
+def load_corpus(
+    data_dir: Path | None = None,
+    generated_dir: Path | None = None,
+) -> list[SequenceRecord]:
+    records = load_training_sequences(data_dir)
+    if generated_dir:
+        generated_root = Path(generated_dir)
+        if generated_root.exists():
+            for path in sorted(generated_root.glob("*.csv")):
+                records.extend(read_long_sequences(path))
+    return records
+
+
 def write_json(path: Path, payload: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
@@ -107,6 +121,18 @@ def read_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def corpus_fingerprint(records: Iterable[SequenceRecord]) -> str:
+    digest = hashlib.sha256()
+    for family, steps in sorted((record.family, tuple(record.steps)) for record in records):
+        digest.update(family.encode("utf-8"))
+        digest.update(b"\0")
+        for step in steps:
+            digest.update(step.encode("utf-8"))
+            digest.update(b"\0")
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
 def build_vocab(records: Iterable[SequenceRecord]) -> dict[str, object]:
     token_counts: Counter[str] = Counter()
     family_counts: Counter[str] = Counter()
@@ -128,4 +154,3 @@ def build_vocab(records: Iterable[SequenceRecord]) -> dict[str, object]:
         "max_length": max(lengths) if lengths else 0,
         "avg_length": (sum(lengths) / len(lengths)) if lengths else 0.0,
     }
-
