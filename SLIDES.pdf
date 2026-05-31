@@ -3,7 +3,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R] /Count 8 >>
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R] /Count 9 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -12,6 +12,45 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
 endobj
 5 0 obj
+<< /Length 616 >>
+stream
+q
+0.96 0.97 0.96 rg
+0 0 960 540 re f
+0.05 0.24 0.32 rg
+0 518 960 22 re f
+0.10 0.10 0.10 rg
+BT /F1 32 Tf 52 456 Td
+(Team and Track) Tj
+ET
+0.05 0.24 0.32 rg
+62 389 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 384 Td
+(Team name: Coding Club.) Tj
+ET
+0.05 0.24 0.32 rg
+62 347 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 342 Td
+(Team members: Evgenii Avdeev, Swathi Dutt.) Tj
+ET
+0.05 0.24 0.32 rg
+62 305 8 8 re f
+0.13 0.13 0.13 rg
+BT /F1 20 Tf 88 300 Td
+(Track 1: Learning and Benchmarking Process Logic.) Tj
+ET
+0.40 0.40 0.40 rg
+BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
+BT /F1 13 Tf 858 36 Td (1/9) Tj ET
+Q
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
 << /Length 842 >>
 stream
 q
@@ -51,14 +90,14 @@ BT /F1 20 Tf 88 242 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (1/8) Tj ET
+BT /F1 13 Tf 858 36 Td (2/9) Tj ET
 Q
 endstream
 endobj
-6 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
 endobj
-7 0 obj
+9 0 obj
 << /Length 927 >>
 stream
 q
@@ -102,14 +141,14 @@ BT /F1 20 Tf 88 213 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (2/8) Tj ET
+BT /F1 13 Tf 858 36 Td (3/9) Tj ET
 Q
 endstream
 endobj
-8 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
 endobj
-9 0 obj
+11 0 obj
 << /Length 952 >>
 stream
 q
@@ -153,14 +192,14 @@ BT /F1 20 Tf 88 213 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (3/8) Tj ET
+BT /F1 13 Tf 858 36 Td (4/9) Tj ET
 Q
 endstream
 endobj
-10 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
 endobj
-11 0 obj
+13 0 obj
 << /Length 935 >>
 stream
 q
@@ -204,14 +243,14 @@ BT /F1 20 Tf 88 213 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (4/8) Tj ET
+BT /F1 13 Tf 858 36 Td (5/9) Tj ET
 Q
 endstream
 endobj
-12 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
 endobj
-13 0 obj
+15 0 obj
 << /Length 834 >>
 stream
 q
@@ -251,14 +290,14 @@ BT /F1 20 Tf 88 242 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (5/8) Tj ET
+BT /F1 13 Tf 858 36 Td (6/9) Tj ET
 Q
 endstream
 endobj
-14 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 17 0 R >>
 endobj
-15 0 obj
+17 0 obj
 << /Length 932 >>
 stream
 q
@@ -302,14 +341,14 @@ BT /F1 20 Tf 88 213 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (6/8) Tj ET
+BT /F1 13 Tf 858 36 Td (7/9) Tj ET
 Q
 endstream
 endobj
-16 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 17 0 R >>
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 19 0 R >>
 endobj
-17 0 obj
+19 0 obj
 << /Length 956 >>
 stream
 q
@@ -353,14 +392,14 @@ BT /F1 20 Tf 88 213 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (7/8) Tj ET
+BT /F1 13 Tf 858 36 Td (8/9) Tj ET
 Q
 endstream
 endobj
-18 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 19 0 R >>
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R >> >> /Contents 21 0 R >>
 endobj
-19 0 obj
+21 0 obj
 << /Length 762 >>
 stream
 q
@@ -396,34 +435,36 @@ BT /F1 20 Tf 88 271 Td
 ET
 0.40 0.40 0.40 rg
 BT /F1 13 Tf 52 36 Td (Industrial AI Process Logic) Tj ET
-BT /F1 13 Tf 858 36 Td (8/8) Tj ET
+BT /F1 13 Tf 858 36 Td (9/9) Tj ET
 Q
 endstream
 endobj
 xref
-0 20
+0 22
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000162 00000 n 
-0000000232 00000 n 
-0000000358 00000 n 
-0000001250 00000 n 
-0000001376 00000 n 
-0000002353 00000 n 
-0000002479 00000 n 
-0000003481 00000 n 
-0000003609 00000 n 
-0000004595 00000 n 
-0000004723 00000 n 
-0000005608 00000 n 
-0000005736 00000 n 
-0000006719 00000 n 
-0000006847 00000 n 
-0000007854 00000 n 
-0000007982 00000 n 
+0000000169 00000 n 
+0000000239 00000 n 
+0000000365 00000 n 
+0000001031 00000 n 
+0000001157 00000 n 
+0000002049 00000 n 
+0000002175 00000 n 
+0000003152 00000 n 
+0000003280 00000 n 
+0000004283 00000 n 
+0000004411 00000 n 
+0000005397 00000 n 
+0000005525 00000 n 
+0000006410 00000 n 
+0000006538 00000 n 
+0000007521 00000 n 
+0000007649 00000 n 
+0000008656 00000 n 
+0000008784 00000 n 
 trailer
-<< /Size 20 /Root 1 0 R >>
+<< /Size 22 /Root 1 0 R >>
 startxref
-8795
+9597
 %%EOF
